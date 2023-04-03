@@ -86,6 +86,18 @@ app.post('/interactions', async function (req, res) {
         },
       });
     }
+
+    if (name === 'schedule') {
+      const userName = req.body.member.nick;
+      const [bossName, date, time] = req.body.data.options.map(option => option.value);
+
+      return res.send({
+        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+        data: {
+          content: `${userName} has proposed a ${bossName} boss event on ${date} at ${time}! ${getRandomEmoji()}`,
+        },
+      });
+    }
   }
 
   /**
